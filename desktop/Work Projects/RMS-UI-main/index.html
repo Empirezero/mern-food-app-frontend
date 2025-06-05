@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RMS - Real Estate Management System</title>
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/home.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* ========== GLOBAL STYLES ========== */
+:root {
+    --primary: #4361ee;
+    --primary-dark: #3a56d4;
+    --secondary: #3f37c9;
+    --dark: #1b263b;
+    --dark-alt: #415a77;
+    --light: #f8f9fa;
+    --light-alt: #e9ecef;
+    --white: #ffffff;
+    --gray: #6c757d;
+    --success: #4cc9f0;
+    --warning: #f8961e;
+    --danger: #ef233c;
+    --transition: all 0.3s ease;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: var(--dark);
+    background-color: var(--light);
+    overflow-x: hidden;
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-weight: 500;
+    text-align: center;
+    transition: var(--transition);
+    cursor: pointer;
+    border: 2px solid transparent;
+}
+
+.btn-primary {
+    background-color: var(--primary);
+    color: var(--white);
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-dark);
+}
+
+.btn-outline {
+    background-color: transparent;
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+.btn-outline:hover {
+    background-color: var(--primary);
+    color: var(--white);
+}
+
+.btn-large {
+    padding: 12px 30px;
+    font-size: 1.1rem;
+}
+
+.section-title {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    text-align: center;
+    color: var(--dark);
+}
+
+.section-subtitle {
+    font-size: 1.1rem;
+    color: var(--gray);
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 3rem;
+}
+
+/* ========== NAVBAR ========== */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: var(--white);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    padding: 15px 0;
+    transition: var(--transition);
+}
+
+.navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--dark);
+}
+
+.logo img {
+    height: 40px;
+    margin-right: 10px;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.nav-links a {
+    font-weight: 500;
+    transition: var(--transition);
+    position: relative;
+}
+
+.nav-links a:hover {
+    color: var(--primary);
+}
+
+.nav-links a.active {
+    color: var(--primary);
+}
+
+.nav-links a.active::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--primary);
+}
+
+.hamburger {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.hamburger span {
+    display: block;
+    width: 25px;
+    height: 2px;
+    background-color: var(--dark);
+    margin: 5px 0;
+    transition: var(--transition);
+}
+
+.mobile-menu {
+    position: fixed;
+    top: 70px;
+    left: 0;
+    width: 100%;
+    background-color: var(--white);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    transform: translateY(-150%);
+    transition: var(--transition);
+    z-index: 999;
+}
+
+.mobile-menu.active {
+    transform: translateY(0);
+}
+
+/* ========== FOOTER ========== */
+.footer {
+    background-color: var(--dark);
+    color: var(--light);
+    padding: 60px 0 0;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 40px;
+    margin-bottom: 40px;
+}
+
+.footer-col h4 {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.footer-col h4::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 50px;
+    height: 2px;
+    background-color: var(--primary);
+}
+
+.footer-col ul {
+    list-style: none;
+}
+
+.footer-col ul li {
+    margin-bottom: 10px;
+}
+
+.footer-col ul li a {
+    transition: var(--transition);
+}
+
+.footer-col ul li a:hover {
+    color: var(--primary);
+    padding-left: 5px;
+}
+
+.contact-info li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.social-links {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.social-links a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.1);
+    transition: var(--transition);
+}
+
+.social-links a:hover {
+    background-color: var(--primary);
+    transform: translateY(-3px);
+}
+
+.footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.footer-links {
+    display: flex;
+    gap: 20px;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+    .nav-links {
+        display: none;
+    }
+    
+    .hamburger {
+        display: block;
+    }
+    
+    .hamburger.active span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+    }
+    
+    .hamburger.active span:nth-child(2) {
+        opacity: 0;
+    }
+    
+    .hamburger.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(7px, -6px);
+    }
+}
+/* ========== HERO SECTION ========== */
+.hero {
+    padding: 150px 0 80px;
+    background: linear-gradient(135deg, rgba(67, 97, 238, 0.1) 0%, rgba(248, 249, 250, 1) 100%);
+}
+
+.hero .container {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+}
+
+.hero-content {
+    flex: 1;
+}
+
+.hero-image {
+    flex: 1;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+.hero h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    color: var(--dark);
+    line-height: 1.2;
+}
+
+.hero .lead {
+    font-size: 1.2rem;
+    color: var(--gray);
+    margin-bottom: 30px;
+    max-width: 500px;
+}
+
+.cta-buttons {
+    display: flex;
+    gap: 15px;
+}
+
+/* ========== FEATURES SECTION ========== */
+.features {
+    padding: 80px 0;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.feature-card {
+    background-color: var(--white);
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    transition: var(--transition);
+    text-align: center;
+}
+
+.feature-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+.feature-icon {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background-color: rgba(67, 97, 238, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    color: var(--primary);
+    font-size: 1.5rem;
+}
+
+.feature-card h3 {
+    font-size: 1.3rem;
+    margin-bottom: 15px;
+    color: var(--dark);
+}
+
+/* ========== TESTIMONIALS SECTION ========== */
+.testimonials {
+    padding: 80px 0;
+    background-color: var(--light-alt);
+}
+
+.testimonial-slider {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.testimonial {
+    display: none;
+    background-color: var(--white);
+    border-radius: 10px;
+    padding: 40px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    text-align: center;
+}
+
+.testimonial.active {
+    display: block;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.testimonial-content p {
+    font-size: 1.1rem;
+    font-style: italic;
+    margin-bottom: 20px;
+    color: var(--dark);
+}
+
+.testimonial-author h4 {
+    font-size: 1.2rem;
+    color: var(--dark);
+    margin-bottom: 5px;
+}
+
+.testimonial-author span {
+    color: var(--gray);
+    font-size: 0.9rem;
+}
+
+.slider-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.slider-prev, .slider-next {
+    background: none;
+    border: none;
+    color: var(--primary);
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.slider-prev:hover, .slider-next:hover {
+    color: var(--primary-dark);
+}
+
+.slider-dots {
+    display: flex;
+    gap: 10px;
+}
+
+.slider-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: var(--light);
+    border: 2px solid var(--primary);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.slider-dot.active {
+    background-color: var(--primary);
+}
+
+/* ========== CTA SECTION ========== */
+.cta {
+    padding: 80px 0;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    color: var(--white);
+    text-align: center;
+}
+
+.cta .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.cta h2 {
+    font-size: 2rem;
+    margin-bottom: 15px;
+}
+
+.cta p {
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin-bottom: 30px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .hero .container {
+        flex-direction: column;
+    }
+    
+    .hero-content, .hero-image {
+        flex: none;
+        width: 100%;
+    }
+    
+    .hero h1 {
+        font-size: 2.2rem;
+    }
+    
+    .cta-buttons {
+        flex-direction: column;
+    }
+    
+    .feature-card {
+        padding: 20px;
+    }
+}
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <img src="assets/images/logo.png" alt="RMS Logo">
+                <span>RMS</span>
+            </a>
+            
+            <div class="nav-links">
+                <a href="index.html" class="active">Home</a>
+                <a href="about.html">About Us</a>
+                <a href="contact.html">Contact</a>
+                <a href="get-started.html" class="btn btn-primary">Get Started</a>
+            </div>
+            
+            <button class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu">
+        <a href="index.html" class="active">Home</a>
+        <a href="about.html">About Us</a>
+        <a href="contact.html">Contact</a>
+        <a href="get-started.html" class="btn btn-primary">Get Started</a>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Transform Your Real Estate Business</h1>
+                <p class="lead">Powerful management software designed for land selling companies to streamline operations and boost sales</p>
+                <div class="cta-buttons">
+                    <a href="get-started.html" class="btn btn-primary">Get Started</a>
+                    <a href="#features" class="btn btn-outline">Learn More</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="assets/images/hero-bg.jpg" alt="Real Estate Dashboard">
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <h2 class="section-title">Why Choose RMS?</h2>
+            <p class="section-subtitle">Comprehensive features designed for real estate professionals</p>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Sales Analytics</h3>
+                    <p>Track sales performance with real-time dashboards and detailed reports.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-map-marked-alt"></i>
+                    </div>
+                    <h3>Property Management</h3>
+                    <p>Easily manage plots, projects, and inventory with our intuitive system.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Customer CRM</h3>
+                    <p>Build better relationships with integrated customer management tools.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-money-bill-wave"></i>
+                    </div>
+                    <h3>Payment Tracking</h3>
+                    <p>Automate payment tracking and reduce manual accounting work.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-file-invoice"></i>
+                    </div>
+                    <h3>Document Generation</h3>
+                    <p>Create professional invoices, contracts, and statements automatically.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>Mobile Ready</h3>
+                    <p>Access your data anywhere with our fully responsive interface.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials">
+        <div class="container">
+            <h2 class="section-title">What Our Clients Say</h2>
+            <p class="section-subtitle">Trusted by real estate companies nationwide</p>
+            
+            <div class="testimonial-slider">
+                <div class="testimonial active">
+                    <div class="testimonial-content">
+                        <p>"RMS has transformed our business operations. We've seen a 40% increase in efficiency since implementation."</p>
+                        <div class="testimonial-author">
+                            <h4>John Smith</h4>
+                            <span>CEO, LandMark Properties</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial">
+                    <div class="testimonial-content">
+                        <p>"The customer management features alone have paid for the system. Highly recommended!"</p>
+                        <div class="testimonial-author">
+                            <h4>Sarah Johnson</h4>
+                            <span>Director, Prime Lands</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial">
+                    <div class="testimonial-content">
+                        <p>"From sales to payments to reporting, RMS handles everything we need in one platform."</p>
+                        <div class="testimonial-author">
+                            <h4>Michael Brown</h4>
+                            <span>Operations Manager, Elite Realty</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="slider-controls">
+                <button class="slider-prev"><i class="fas fa-chevron-left"></i></button>
+                <div class="slider-dots"></div>
+                <button class="slider-next"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Ready to Transform Your Business?</h2>
+                <p>Get started with RMS today and experience the difference professional software can make.</p>
+            </div>
+            <div class="cta-button">
+                <a href="get-started.html" class="btn btn-primary btn-large">Request a Demo</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="logo">
+                        <img src="assets/images/logo.png" alt="RMS Logo">
+                        <span>RMS</span>
+                    </div>
+                    <p>Powerful real estate management software for land selling companies.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="get-started.html">Get Started</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Features</h4>
+                    <ul>
+                        <li><a href="#">Sales Management</a></li>
+                        <li><a href="#">Property Tracking</a></li>
+                        <li><a href="#">Payment Processing</a></li>
+                        <li><a href="#">Reporting Tools</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Contact Us</h4>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-map-marker-alt"></i> 123 Westlands,Nairobi City</li>
+                        <li><i class="fas fa-phone"></i> (123) 456-7890</li>
+                        <li><i class="fas fa-envelope"></i> info@rms.com</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2023 RMS. All rights reserved.</p>
+                <div class="footer-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/main.js"></script>
+</body>
+</html>
