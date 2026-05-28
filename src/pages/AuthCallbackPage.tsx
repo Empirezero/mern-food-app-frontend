@@ -7,7 +7,7 @@ const AuthCallbackPage = () => {
   const navigate = useNavigate();
   const { user } = useAuth0();
   const { createUser } = useCreateMyUser();
-
+  
   const hasCreatedUser = useRef(false);
 
   useEffect(() => {
@@ -17,7 +17,7 @@ const AuthCallbackPage = () => {
     }
     navigate("/");
   }, [createUser, navigate, user]);
-
+ 
   return <>Loading...</>;
 };
 

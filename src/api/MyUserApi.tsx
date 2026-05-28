@@ -89,6 +89,7 @@ export const useUpdateMyUser = () => {
   const { getAccessTokenSilently } = useAuth0();
 
   const updateMyUserRequest = async (formData: UpdateMyUserRequest) => {
+    //gets the access token from auth0 and then we are making a fetch request to the backend to update the user profile with the form data that we get from the user profile form and then we are passing that fetch request to the use mutation hook so that react query can handle the request for us and then we are showing a toast message based on the success or error of the request
     const accessToken = await getAccessTokenSilently();
     //creating fetch request api
     const response = await fetch(`${API_BASE_URL}/api/my/user`, {
@@ -123,7 +124,7 @@ export const useUpdateMyUser = () => {
     toast.error(error.toString());
     reset();
   }
-
+//returning the updateUser function and the isLoading state so that we can use it in the user profile form to show a loading state when the user profile is being updated
   return { updateUser, isLoading };
 };
 

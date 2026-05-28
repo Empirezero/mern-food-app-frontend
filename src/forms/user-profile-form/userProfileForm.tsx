@@ -28,6 +28,7 @@ export type UserFormData = z.infer<typeof formSchema>;
 
 type Props = {
   currentUser: User;
+//onSave is a function that takes the user profile data from the form and updates the user profile in the backend and then shows a toast message based on the success or error of the request
   onSave: (userProfileData: UserFormData) => void;
   isLoading: boolean;
   title?: string;
@@ -82,6 +83,7 @@ const UserProfileForm = ({
             <FormItem>
               <FormLabel>Name</FormLabel>
               <FormControl>
+                //
                 <Input {...field} className="bg-white" />
               </FormControl>
               <FormMessage />
