@@ -12,8 +12,8 @@ import { Restaurant } from "@/types";
 import { useEffect } from "react";
 import ImageSection from "./ImageSection";
 
-
-const formSchema = z
+// This form is used to create or update a restaurant. It uses react-hook-form for form state management and zod for validation. The form is divided into sections for better organization and user experience. The onSave function is called when the form is submitted, and it receives the form data as a FormData object, which can include both text fields and file uploads (for the restaurant image).
+const formSchema = z 
   .object({
     restaurantName: z.string({
       required_error: "restuarant name is required",
@@ -49,7 +49,7 @@ const formSchema = z
     path: ["imageFile"],
   });
 
-type RestaurantFormData = z.infer<typeof formSchema>;
+type RestaurantFormData = z.infer<typeof formSchema>;// Infer the form data type from the zod schema for strong typing and better developer experience.
 
 type Props = {
   restaurant?: Restaurant;
@@ -91,8 +91,9 @@ const ManageRestaurantForm = ({ onSave, isLoading, restaurant }: Props) => {
   }, [form, restaurant]);
 
   const onSubmit = (formDataJson: RestaurantFormData) => {
+    //convert formDataJson to new FormData object to handle file uploads and text fields together
     const formData = new FormData();
-
+// Append form data to FormData object, including text fields and file uploads
     formData.append("restaurantName", formDataJson.restaurantName);
     formData.append("city", formDataJson.city);
     formData.append("country", formDataJson.country);
